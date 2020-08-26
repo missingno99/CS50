@@ -1,0 +1,476 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <math.h>
+
+int main(void)
+{
+    //The too many commandments
+    long long cnumber;
+    long long one;
+    long long two;
+    long long three;
+    long long four;
+    long long five;
+    long long six;
+    long long seven;
+    long long eight;
+    long long nine;
+    long long ten;
+    long long eleven;
+    long long twelve;
+    long long thirteen;
+    long long fourteen;
+    long long fifteen;
+    long long sixteen;
+    
+    //Keep the user in purgatory until they conform
+    do
+    {
+        cnumber = get_long_long("Number: ");
+    }
+    while (cnumber < 0);
+
+    //Counter
+    int count = 0;
+    long long ctdigits = cnumber;
+    long long digits = cnumber;
+    
+    while (ctdigits > 0)
+    {
+        ctdigits = ctdigits / 10;
+        count++;
+    } 
+    
+    //If count != 13,15,16
+    if ((count != 13) && (count != 15) && (count != 16))
+    {
+        printf("INVALID\n");
+    }
+
+    //If count = 13 (digits)
+    else if (count == 13)
+    {
+        long long visa = cnumber / pow(10, 12);
+
+        if (visa == 4)
+        {
+            //Identification of digits (NIGHTMARE NIGHTMARE NIGHTMARE)
+            one = digits / pow(10, 12);
+            two = digits / pow(10, 11) - one * pow(10, 1);
+            three = digits / pow(10, 10) - one * pow(10, 2) - two * pow(10, 1);
+            four = digits / pow(10, 9) - one * pow(10, 3) - two * pow(10, 2) - three * pow(10, 1);
+            five = digits / pow(10, 8) - one * pow(10, 4) - two * pow(10, 3) - three * pow(10, 2) - four * pow(10, 1);
+            six = digits / pow(10, 7) - one * pow(10, 5) - two * pow(10, 4) - three * pow(10, 3) - four * pow(10, 2) - five * pow(10, 1);
+            seven = digits / pow(10, 6) - one * pow(10, 6) - two * pow(10, 5) - three * pow(10, 4) - four * pow(10, 3) - five * pow(10, 2) - six * pow(10, 1);
+            eight = digits / pow(10, 5) - one * pow(10, 7) - two * pow(10, 6) - three * pow(10, 5) - four * pow(10, 4) - five * pow(10, 3) - six * pow(10, 2) - seven * pow(10, 1);
+            nine = digits / pow(10, 4) - one * pow(10, 8) - two * pow(10, 7) - three * pow(10, 6) - four * pow(10, 5) - five * pow(10, 4) - six * pow(10, 3) - seven * pow(10, 2) - eight * pow(10, 1);
+            ten = digits / pow(10, 3) - one * pow(10, 9) - two * pow(10, 8) - three * pow(10, 7) - four * pow(10, 6) - five * pow(10, 5) - six * pow(10, 4) - seven * pow(10, 3) - eight * pow(10, 2) - nine * pow(10, 1);
+            eleven = digits / pow(10, 2) - one * pow(10, 10) - two * pow(10, 9) - three * pow(10, 8) - four * pow(10, 7) - five * pow(10, 6) - six * pow(10, 5) - seven * pow(10, 4) - eight * pow(10, 3) - nine * pow(10, 2) - ten * pow(10, 1);
+            twelve = digits / pow(10, 1) - one * pow(10, 11) - two * pow(10, 10) - three * pow(10, 9) - four * pow(10, 8) - five * pow(10, 7) - six * pow(10, 6) - seven * pow(10, 5) - eight * pow(10, 4) - nine * pow(10, 3) - ten * pow(10, 2) - eleven * pow(10, 1);
+            thirteen = digits / pow(10, 0) - one * pow(10, 12) - two * pow(10, 11) - three * pow(10, 10) - four * pow(10, 9) - five * pow(10, 8) - six * pow(10, 7) - seven * pow(10, 6) - eight * pow(10, 5) - nine * pow(10, 4) - ten * pow(10, 3) - eleven * pow(10, 2) - twelve * pow(10, 1);
+
+            //Luhn's algorithm: Digit separation and multiplication
+            int check1 = 0;  
+            int number1;
+            int number2;
+
+            int a = twelve * 2;
+
+            if ((a / 10) > 0)
+            {
+                int a1 = a / 10;
+                int a2 =  a - a1 * 10;
+                check1 = check1 + a1 + a2;
+            }
+            else 
+            {
+                check1 = check1 + a;
+            }
+
+            int b = ten * 2;
+
+            if ((b / 10) > 0)
+            {
+                int b1 = b / 10;
+                int b2 = b - b1 * 10;
+                check1 = check1 + b1 + b2;
+            }
+            else 
+            {
+                check1 = check1 + b;
+            }
+
+            int c = eight * 2;
+
+            if ((c / 10) > 0)
+            {
+                int c1 = c / 10;
+                int c2 = c - c1 * 10;
+                check1 = check1 + c1 + c2;
+            }
+            else 
+            {
+                check1 = check1 + c;
+            }
+
+            int d = six * 2;
+
+            if ((d / 10) > 0)
+            {
+                int d1 = d / 10;
+                int d2 = d - d1 * 10;
+                check1 = check1 + d1 + d2;
+            }
+            else 
+            {
+                check1 = check1 + d;
+            }
+
+            int e = four * 2;
+
+            if ((e / 10) > 0)
+            {
+                int e1 = e / 10;
+                int e2 = e - e1 * 10;
+                check1 = check1 + e1 + e2;
+            }
+            else 
+            {
+                check1 = check1 + e;
+            }
+
+            int f = two * 2;
+
+            if ((f / 10) > 0)
+            {
+                int f1 = f / 10;
+                int f2 = f - f1 * 10;
+                check1 = check1 + f1 + f2;
+            }
+            else 
+            {
+                check1 = check1 + f;
+            }
+
+            int check2 = check1 + thirteen + eleven + nine + seven + five + three + one;
+            
+            //Checksum check
+            if (check2 % 10 == 0)
+            {
+                printf("VISA\n");
+            }
+            else 
+            {
+                printf("INVALID\n");
+            }
+        }
+
+        else
+        {
+            printf("INVALID\n");
+        }   
+    }
+
+    //If count = 15 (digits)
+    else if (count == 15)
+    {
+        long long amex = cnumber / pow(10, 13);
+        
+        if (amex == 34 || amex == 37)
+        {
+            //Identification of digits (NIGHTMARE NIGHTMARE NIGHTMARE)
+            one = digits / pow(10, 14);
+            two = digits / pow(10, 13) - one * pow(10, 1);
+            three = digits / pow(10, 12) - one * pow(10, 2) - two * pow(10, 1);
+            four = digits / pow(10, 11) - one * pow(10, 3) - two * pow(10, 2) - three * pow(10, 1);
+            five = digits / pow(10, 10) - one * pow(10, 4) - two * pow(10, 3) - three * pow(10, 2) - four * pow(10, 1);
+            six = digits / pow(10, 9) - one * pow(10, 5) - two * pow(10, 4) - three * pow(10, 3) - four * pow(10, 2) - five * pow(10, 1);
+            seven = digits / pow(10, 8) - one * pow(10, 6) - two * pow(10, 5) - three * pow(10, 4) - four * pow(10, 3) - five * pow(10, 2) - six * pow(10, 1);
+            eight = digits / pow(10, 7) - one * pow(10, 7) - two * pow(10, 6) - three * pow(10, 5) - four * pow(10, 4) - five * pow(10, 3) - six * pow(10, 2) - seven * pow(10, 1);
+            nine = digits / pow(10, 6) - one * pow(10, 8) - two * pow(10, 7) - three * pow(10, 6) - four * pow(10, 5) - five * pow(10, 4) - six * pow(10, 3) - seven * pow(10, 2) - eight * pow(10, 1);
+            ten = digits / pow(10, 5) - one * pow(10, 9) - two * pow(10, 8) - three * pow(10, 7) - four * pow(10, 6) - five * pow(10, 5) - six * pow(10, 4) - seven * pow(10, 3) - eight * pow(10, 2) - nine * pow(10, 1);
+            eleven = digits / pow(10, 4) - one * pow(10, 10) - two * pow(10, 9) - three * pow(10, 8) - four * pow(10, 7) - five * pow(10, 6) - six * pow(10, 5) - seven * pow(10, 4) - eight * pow(10, 3) - nine * pow(10, 2) - ten * pow(10, 1);
+            twelve = digits / pow(10, 3) - one * pow(10, 11) - two * pow(10, 10) - three * pow(10, 9) - four * pow(10, 8) - five * pow(10, 7) - six * pow(10, 6) - seven * pow(10, 5) - eight * pow(10, 4) - nine * pow(10, 3) - ten * pow(10, 2) - eleven * pow(10, 1);
+            thirteen = digits / pow(10, 2) - one * pow(10, 12) - two * pow(10, 11) - three * pow(10, 10) - four * pow(10, 9) - five * pow(10, 8) - six * pow(10, 7) - seven * pow(10, 6) - eight * pow(10, 5) - nine * pow(10, 4) - ten * pow(10, 3) - eleven * pow(10, 2) - twelve * pow(10, 1);
+            fourteen = digits / pow(10, 1) - one * pow(10, 13) - two * pow(10, 12) - three * pow(10, 11) - four * pow(10, 10) - five * pow(10, 9) - six * pow(10, 8) - seven * pow(10, 7) - eight * pow(10, 6) - nine * pow(10, 5) - ten * pow(10, 4) - eleven * pow(10, 3) - twelve * pow(10, 2) - thirteen * pow(10, 1);
+            fifteen = digits / pow(10, 0) - one * pow(10, 14) - two * pow(10, 13) - three * pow(10, 12) - four * pow(10, 11) - five * pow(10, 10) - six * pow(10, 9) - seven * pow(10, 8) - eight * pow(10, 7) - nine * pow(10, 6) - ten * pow(10, 5) - eleven * pow(10, 4) - twelve * pow(10, 3) - thirteen * pow(10, 2) - fourteen * pow(10, 1);
+            
+            //Luhn's algorithm: Digit separation and multiplication
+            int check1 = 0;  
+            int number1;
+            int number2;
+
+            int a = fourteen * 2;
+
+            if ((a / 10) > 0)
+            {
+                int a1 = a / 10;
+                int a2 =  a - a1 * 10;
+                check1 = check1 + a1 + a2;
+            }
+            else 
+            {
+                check1 = check1 + a;
+            }
+
+            int b = twelve * 2;
+
+            if ((b / 10) > 0)
+            {
+                int b1 = b / 10;
+                int b2 = b - b1 * 10;
+                check1 = check1 + b1 + b2;
+            }
+            else 
+            {
+                check1 = check1 + b;
+            }
+
+            int c = ten * 2;
+
+            if ((c / 10) > 0)
+            {
+                int c1 = c / 10;
+                int c2 = c - c1 * 10;
+                check1 = check1 + c1 + c2;
+            }
+            else 
+            {
+                check1 = check1 + c;
+            }
+
+            int d = eight * 2;
+
+            if ((d / 10) > 0)
+            {
+                int d1 = d / 10;
+                int d2 = d - d1 * 10;
+                check1 = check1 + d1 + d2;
+            }
+            else 
+            {
+                check1 = check1 + d;
+            }
+
+            int e = six * 2;
+
+            if ((e / 10) > 0)
+            {
+                int e1 = e / 10;
+                int e2 = e - e1 * 10;
+                check1 = check1 + e1 + e2;
+            }
+            else 
+            {
+                check1 = check1 + e;
+            }
+
+            int f = four * 2;
+
+            if ((f / 10) > 0)
+            {
+                int f1 = f / 10;
+                int f2 = f - f1 * 10;
+                check1 = check1 + f1 + f2;
+            }
+            else 
+            {
+                check1 = check1 + f;
+            }
+
+            int g = two * 2;
+
+            if ((g / 10) > 0)
+            {
+                int g1 = g / 10;
+                int g2 = g - g1 * 10;
+                check1 = check1 + g1 + g2;
+            }
+            else 
+            {
+                check1 = check1 + g;
+            }
+
+            int check2 = check1 + fifteen + thirteen + eleven + nine + seven + five + three + one;
+
+            //Luhn's algorithm: Checksum check
+            if (check2 % 10 == 0)
+            {
+                printf("AMEX\n");
+            }
+            else 
+            {
+                printf("INVALID\n");
+            }
+        }
+
+        
+        else
+        {
+            printf("INVALID\n");
+        }
+    }
+
+    //If count = 16 (digits)
+    else
+    {
+        long long msc = cnumber / pow(10, 14);
+        long long visa2 = cnumber / pow(10, 15);
+
+        if (msc == 51 || msc == 52 || msc == 53 || msc == 54 || msc == 55 || visa2 == 4)
+        {
+            //Identification of digits (NIGHTMARE NIGHTMARE NIGHTMARE)
+            one = digits / pow(10, 15);
+            two = digits / pow(10, 14) - one * pow(10, 1);
+            three = digits / pow(10, 13) - one * pow(10, 2) - two * pow(10, 1);
+            four = digits / pow(10, 12) - one * pow(10, 3) - two * pow(10, 2) - three * pow(10, 1);
+            five = digits / pow(10, 11) - one * pow(10, 4) - two * pow(10, 3) - three * pow(10, 2) - four * pow(10, 1);
+            six = digits / pow(10, 10) - one * pow(10, 5) - two * pow(10, 4) - three * pow(10, 3) - four * pow(10, 2) - five * pow(10, 1);
+            seven = digits / pow(10, 9) - one * pow(10, 6) - two * pow(10, 5) - three * pow(10, 4) - four * pow(10, 3) - five * pow(10, 2) - six * pow(10, 1);
+            eight = digits / pow(10, 8) - one * pow(10, 7) - two * pow(10, 6) - three * pow(10, 5) - four * pow(10, 4) - five * pow(10, 3) - six * pow(10, 2) - seven * pow(10, 1);
+            nine = digits / pow(10, 7) - one * pow(10, 8) - two * pow(10, 7) - three * pow(10, 6) - four * pow(10, 5) - five * pow(10, 4) - six * pow(10, 3) - seven * pow(10, 2) - eight * pow(10, 1);
+            ten = digits / pow(10, 6) - one * pow(10, 9) - two * pow(10, 8) - three * pow(10, 7) - four * pow(10, 6) - five * pow(10, 5) - six * pow(10, 4) - seven * pow(10, 3) - eight * pow(10, 2) - nine * pow(10, 1);
+            eleven = digits / pow(10, 5) - one * pow(10, 10) - two * pow(10, 9) - three * pow(10, 8) - four * pow(10, 7) - five * pow(10, 6) - six * pow(10, 5) - seven * pow(10, 4) - eight * pow(10, 3) - nine * pow(10, 2) - ten * pow(10, 1);
+            twelve = digits / pow(10, 4) - one * pow(10, 11) - two * pow(10, 10) - three * pow(10, 9) - four * pow(10, 8) - five * pow(10, 7) - six * pow(10, 6) - seven * pow(10, 5) - eight * pow(10, 4) - nine * pow(10, 3) - ten * pow(10, 2) - eleven * pow(10, 1);
+            thirteen = digits / pow(10, 3) - one * pow(10, 12) - two * pow(10, 11) - three * pow(10, 10) - four * pow(10, 9) - five * pow(10, 8) - six * pow(10, 7) - seven * pow(10, 6) - eight * pow(10, 5) - nine * pow(10, 4) - ten * pow(10, 3) - eleven * pow(10, 2) - twelve * pow(10, 1);
+            fourteen = digits / pow(10, 2) - one * pow(10, 13) - two * pow(10, 12) - three * pow(10, 11) - four * pow(10, 10) - five * pow(10, 9) - six * pow(10, 8) - seven * pow(10, 7) - eight * pow(10, 6) - nine * pow(10, 5) - ten * pow(10, 4) - eleven * pow(10, 3) - twelve * pow(10, 2) - thirteen * pow(10, 1);
+            fifteen = digits / pow(10, 1) - one * pow(10, 14) - two * pow(10, 13) - three * pow(10, 12) - four * pow(10, 11) - five * pow(10, 10) - six * pow(10, 9) - seven * pow(10, 8) - eight * pow(10, 7) - nine * pow(10, 6) - ten * pow(10, 5) - eleven * pow(10, 4) - twelve * pow(10, 3) - thirteen * pow(10, 2) - fourteen * pow(10, 1);
+            sixteen = digits / pow(10, 0) - one * pow(10, 15) - two * pow(10, 14) - three * pow(10, 13) - four * pow(10, 12) - five * pow(10, 11) - six * pow(10, 10) - seven * pow(10, 9) - eight * pow(10, 8) - nine * pow(10, 7) - ten * pow(10, 6) - eleven * pow(10, 5) - twelve * pow(10, 4) - thirteen * pow(10, 3) - fourteen * pow(10, 2) - fifteen * pow(10, 1);
+
+            //Luhn's algorithm: Digit separation and multiplication
+            int check1 = 0;  
+            int number1;
+            int number2;
+
+            int a = fifteen * 2;
+
+            if ((a / 10) > 0)
+            {
+                int a1 = a / 10;
+                int a2 =  a - a1 * 10;
+                check1 = check1 + a1 + a2;
+            }
+            else 
+            {
+                check1 = check1 + a;
+            }
+
+            int b = thirteen * 2;
+
+            if ((b / 10) > 0)
+            {
+                int b1 = b / 10;
+                int b2 = b - b1 * 10;
+                check1 = check1 + b1 + b2;
+            }
+            else 
+            {
+                check1 = check1 + b;
+            }
+
+            int c = eleven * 2;
+
+            if ((c / 10) > 0)
+            {
+                int c1 = c / 10;
+                int c2 = c - c1 * 10;
+                check1 = check1 + c1 + c2;
+            }
+            else 
+            {
+                check1 = check1 + c;
+            }
+
+            int d = nine * 2;
+
+            if ((d / 10) > 0)
+            {
+                int d1 = d / 10;
+                int d2 = d - d1 * 10;
+                check1 = check1 + d1 + d2;
+            }
+            else 
+            {
+                check1 = check1 + d;
+            }
+
+            int e = seven * 2;
+
+            if ((e / 10) > 0)
+            {
+                int e1 = e / 10;
+                int e2 = e - e1 * 10;
+                check1 = check1 + e1 + e2;
+            }
+            else 
+            {
+                check1 = check1 + e;
+            }
+
+            int f = five * 2;
+
+            if ((f / 10) > 0)
+            {
+                int f1 = f / 10;
+                int f2 = f - f1 * 10;
+                check1 = check1 + f1 + f2;
+            }
+            else 
+            {
+                check1 = check1 + f;
+            }
+
+            int g = three * 2;
+
+            if ((g / 10) > 0)
+            {
+                int g1 = g / 10;
+                int g2 = g - g1 * 10;
+                check1 = check1 + g1 + g2;
+            }
+            else 
+            {
+                check1 = check1 + g;
+            }
+
+            int h = one * 2;
+
+            if ((h / 10) > 0)
+            {
+                int h1 = h / 10;
+                int h2 = h - h1 * 10;
+                check1 = check1 + h1 + h2;
+            }
+            else 
+            {
+                check1 = check1 + h;
+            }
+
+            int check2 = check1 + sixteen + fourteen + twelve + ten + eight + six + four + two;
+            
+            //Checksum check
+            if (check2 % 10 == 0)
+            {
+                if (visa2 == 4)
+                {
+                    printf("VISA\n");
+                }
+
+                else
+                {
+                    printf("MASTERCARD\n");
+                } 
+            }
+            else 
+            {
+                printf("INVALID\n");
+            }
+        }
+
+        else
+        {
+            printf("INVALID\n");
+        }
+        
+    }
+}
